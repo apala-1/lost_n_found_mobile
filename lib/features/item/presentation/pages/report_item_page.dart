@@ -126,6 +126,9 @@ Future<void> _pickFromCamera() async {
       _selectedMedia.clear();
       _selectedMedia.add(photo);
     });
+
+    // upload image to server
+    await ref.read(itemViewModelProvider.notifier).uploadPhoto(File(photo.path));
   }
 }
 
@@ -151,13 +154,16 @@ Future<void> _pickFromGallery({bool allowMultiple = false}) async
           setState(() {
           _selectedMedia.clear();
           _selectedMedia.add(image);
-    });
         });
+        });
+        await ref.read(itemViewModelProvider.notifier).uploadPhoto(File(image.path));
       }
     }
   } catch (e) {
     debugPrint('Gallery Error $e');
-    SnackbarUtils.showError(context, 'Tapaiko gallery access garna payena, kripaya garera camera kholnus ani photo khichnus');
+    if (e.toString().contains('no_valid_image_uri') && mounted) {
+      SnackbarUtils.showError(context, 'Tapaiko gallery access garna payena, kripaya garera camera kholnus ani photo khichnus');
+    }
   }
  }
 // code for video

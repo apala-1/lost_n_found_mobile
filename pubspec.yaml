@@ -12,6 +12,9 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # App Icon
+  flutter_launcher_icons: ^0.14.4
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
@@ -104,3 +107,10 @@ flutter:
   assets:
     - assets/icons/
     - assets/svg/
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: "AppIcon"
+  image_path: assets/icons/google_logo.png
+  min_sdk_android: 21
+  remove_alpha_ios: true
